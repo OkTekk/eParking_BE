@@ -35,7 +35,8 @@ public class main extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main_relative);
+        setContentView(R.layout.activity_main_linear);
 
         idAuto2 = (EditText) findViewById(R.id.idauto2);
         idAuto2.addTextChangedListener(textWatcher);
