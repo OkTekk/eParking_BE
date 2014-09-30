@@ -19,17 +19,16 @@ import android.widget.Toast;
 
 
 public class main extends ActionBarActivity {
-    private EditText idauto2 = null, idzone2 = null;
-    private RadioGroup contact;
+    private EditText idAuto2 = null, idZone2 = null;
+    private RadioGroup contactGrp;
     private Button startButton = null, stopButton = null;
-    private TextView timer1 = null;
+    private TextView info1 = null;
 
-    private String message = null;
-    private String strContact = null;
+    private String strContact = null, strMessage = null, strAuto = null, strZone = null;
 
     private final String noIdAuto =     "Veuillez entrer un numéro de plaque\nSans espaces ni traits d'union.";
     private final String noIdZone =     "Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.";
-    private final String contactZero =  "Veuillez cocher un des numéros de contact.";
+    private final String contactNull =  "Veuillez cocher un des numéros de contact.";
     private final String enterValues =  "Veuillez entrer des valeurs !";
     private final String strConfirm =   "Message envoyé.\nVous allez recevoir un SMS de confirmation...";
 
@@ -38,34 +37,13 @@ public class main extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        idauto2 = (EditText) findViewById(R.id.idauto2);
-        idauto2.addTextChangedListener(textWatcher);
+        idAuto2 = (EditText) findViewById(R.id.idauto2);
+        idAuto2.addTextChangedListener(textWatcher);
 
-        idzone2 = (EditText) findViewById(R.id.idzone2);
-        idzone2.addTextChangedListener(textWatcher);
+        idZone2 = (EditText) findViewById(R.id.idzone2);
+        idZone2.addTextChangedListener(textWatcher);
 
-        String strAuto = idauto2.getText().toString();
-        String strZone = idzone2.getText().toString();
-        message = strAuto + " " + strZone;
-//        message = message.concat(String.valueOf(idauto2));
-//        message = message.concat(" ");
-//        message = message.concat(String.valueOf(idzone2));
-//        message = message.concat(" ");
-
-        contact = (RadioGroup) findViewById(R.id.contact);
-
-        switch(contact.getCheckedRadioButtonId()) {
-            case R.id.numero1:  strContact = "4411"; break;
-            case R.id.numero2:  strContact = "4810"; break;
-            case R.id.numero3:  strContact = "0495256023"; break;
-            case R.id.numero4:  strContact = "0494493051"; break;
-            default:            break;
-        }
-//        if(contact.getCheckedRadioButtonId() == R.id.numero1) {
-//            strContact = "4411"; }
-//        else if(contact.getCheckedRadioButtonId() == R.id.numero2) {
-//            strContact = "4810"; }
-//        else { strContact = "0495256023"; }
+        contactGrp = (RadioGroup) findViewById(R.id.contact);
 
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(startWatcher);
@@ -73,14 +51,14 @@ public class main extends ActionBarActivity {
         stopButton = (Button) findViewById(R.id.stopButton);
         stopButton.setOnClickListener(stopWatcher);
 
-        timer1 = (TextView) findViewById(R.id.timer1);
+        info1 = (TextView) findViewById(R.id.info1);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            timer1.setText(R.string.timer2);
+            info1.setText("");
         }
 
         @Override
@@ -94,41 +72,45 @@ public class main extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            String aString = idauto2.getText().toString();
-            String zString = idzone2.getText().toString();
+            strAuto = idAuto2.getText().toString();
+            strZone = idZone2.getText().toString();
+            strMessage = strZone + " " + strAuto;
 
-            switch(contact.getCheckedRadioButtonId()) {
-                case R.id.numero1: case R.id.numero2:
-                case R.id.numero3: case R.id.numero4:
+            if(contactGrp.getCheckedRadioButtonId() == R.id.numero1) {
+                strContact = "4411"; }
 
-                    if(aString.length() == 0 && zString.length() == 0) {
-                        Toast.makeText(main.this, enterValues, Toast.LENGTH_SHORT).show(); }
-                    else if(aString.length() == 0) {
-                        Toast.makeText(main.this, noIdAuto, Toast.LENGTH_SHORT).show(); }
-                    else if(zString.length() == 0) {
-                        Toast.makeText(main.this, noIdZone, Toast.LENGTH_SHORT).show(); }
-                    else {
-                        sendSms(strContact, message);
-                        timer1.setText(strConfirm); } break;
+            else if(contactGrp.getCheckedRadioButtonId() == R.id.numero2) {
+                strContact = "4810"; }
 
-                default:
-                    Toast.makeText(main.this, contactZero, Toast.LENGTH_SHORT).show(); break;
-            }
-//            if(contact.getCheckedRadioButtonId() == R.id.numero1 || contact.getCheckedRadioButtonId() == R.id.numero2) {
-//                if(aString.length() == 0 && zString.length() == 0) {
-//                    Toast.makeText(main.this, enterValues, Toast.LENGTH_SHORT).show(); }
-//
-//                else if(aString.length() == 0) {
-//                    Toast.makeText(main.this, noIdAuto, Toast.LENGTH_SHORT).show(); }
-//
-//                else if(zString.length() == 0) {
-//                    Toast.makeText(main.this, noIdZone, Toast.LENGTH_SHORT).show(); }
-//
-//                else {
-//                    sendSms(strContact, message);
-//                    timer1.setText("Message envoyé.\nEn attente de confirmation..."); }}
-//
-//            else { Toast.makeText(main.this, contactZero, Toast.LENGTH_SHORT).show(); }
+            else if(contactGrp.getCheckedRadioButtonId() == R.id.numero3) {
+                strContact = "0495256023"; }
+
+            else if(contactGrp.getCheckedRadioButtonId() == R.id.numero4) {
+                strContact = "0494493051"; }
+
+            else { strContact = "0x0000"; }
+
+
+            String aString = idAuto2.getText().toString();
+            String zString = idZone2.getText().toString();
+
+            if(contactGrp.getCheckedRadioButtonId() == R.id.numero1 || contactGrp.getCheckedRadioButtonId() == R.id.numero2 ||
+                    contactGrp.getCheckedRadioButtonId() == R.id.numero3 || contactGrp.getCheckedRadioButtonId() == R.id.numero4) {
+
+                if(aString.length() == 0 && zString.length() == 0) {
+                    Toast.makeText(main.this, enterValues, Toast.LENGTH_SHORT).show(); }
+
+                else if(aString.length() == 0) {
+                    Toast.makeText(main.this, noIdAuto, Toast.LENGTH_SHORT).show(); }
+
+                else if(zString.length() == 0) {
+                    Toast.makeText(main.this, noIdZone, Toast.LENGTH_SHORT).show(); }
+
+                else {
+                    sendSms(strContact, strMessage);
+                    info1.setText("Message \"" + strMessage + "\" envoyé au numéro " + strContact + ".\nEn attente de confirmation..."); }}
+
+            else { Toast.makeText(main.this, contactNull, Toast.LENGTH_SHORT).show(); }
         }
     };
 
@@ -140,8 +122,8 @@ public class main extends ActionBarActivity {
 
 //            idzone2.getText().clear();
 //            idauto2.getText().clear();
-
-//            timer1.setText(R.string.RESULTAT_BAS_ECRAN);
+//
+//            info1.setText(R.string.RESULTAT_BAS_ECRAN);
         }
     };
 
@@ -154,7 +136,8 @@ public class main extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) { return true; }
+        if(id == R.id.action_settings) {
+            return true; }
 
         return super.onOptionsItemSelected(item);
     }
@@ -166,6 +149,6 @@ public class main extends ActionBarActivity {
         if(message == "Q") {
             sms.sendTextMessage(contact, null, "Q", pi, null); }
 
-        else { sms.sendTextMessage(contact, null, message, pi, null);}
+        else { sms.sendTextMessage(contact, null, message, pi, null); }
     }
 }

@@ -109,13 +109,13 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/timer1"
+        android:id="@+id/info1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#CECEF6"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="@string/timer1"
+        android:text="@string/info1"
         android:layout_marginBottom="94dp"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
