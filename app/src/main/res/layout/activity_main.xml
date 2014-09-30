@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/idauto1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/idauto2"
+        android:text="@string/idauto1"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/idauto2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/idauto2"
+        android:textSize="18sp"
+        android:inputType="numberDecimal"
+        android:layout_toRightOf="@id/idauto1"
+        android:layout_toEndOf="@id/idauto1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/idzone1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/idzone2"
+        android:text="@string/idzone1"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/idzone2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/idzone2"
+        android:textSize="18sp"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/idauto2"
+        android:layout_toRightOf="@id/idzone1"
+        android:layout_toEndOf="@id/idzone1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
+
+    <RadioGroup
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radioChecked"
+        android:layout_below="@id/idzone2"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/numero1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numero1"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/numero2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numero2"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/numero3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numero3"
+            android:textSize="18sp" />
+        <RadioButton
+            android:id="@+id/numero4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numero4"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/stopButton"
+        android:layout_alignLeft="@+id/idauto2"
+        android:layout_alignStart="@+id/idauto2"
+        android:clickable="true" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        android:layout_toEndOf="@+id/startButton"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/contact"
+        android:layout_toRightOf="@+id/startButton"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/timer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#CECEF6"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/timer1"
+        android:layout_marginBottom="94dp"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

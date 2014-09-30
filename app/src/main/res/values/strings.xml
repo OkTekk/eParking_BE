@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">eParking BE</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Préférences</string>
+    <string name="numero1">4411</string>
+    <string name="numero2">4810</string>
+    <string name="numero3">Mom</string>
+    <string name="numero4">Val</string>
+    <string name="idauto1">Immatriculation</string>
+    <string name="idauto2">1DLI125</string>
+    <string name="idzone1">Identifiant de Zone</string>
+    <string name="idzone2">Ver2</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="info1">info1</string>
+    <string name="info2">info2</string>
+    <string name="timer1"></string>
+    <string name="timer2">timer2</string>
+
+</resources>
