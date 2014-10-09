@@ -1,18 +1,24 @@
 package be.laurent_fournier.eparkingbe;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,12 +36,10 @@ public class main extends ActionBarActivity {
     private final String noIdZone =     "Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.";
     private final String contactNull =  "Veuillez cocher un des numéros de contact.";
     private final String enterValues =  "Veuillez entrer des valeurs !";
-    private final String strConfirm =   "Message envoyé.\nVous allez recevoir un SMS de confirmation...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main_relative);
         setContentView(R.layout.activity_main_linear);
 
         idAuto2 = (EditText) findViewById(R.id.idauto2);
@@ -69,7 +73,7 @@ public class main extends ActionBarActivity {
         public void afterTextChanged(Editable s) { }
     };
 
-    private View.OnClickListener startWatcher = new View.OnClickListener(){
+    private OnClickListener startWatcher = new OnClickListener(){
 
         @Override
         public void onClick(View v) {
@@ -83,20 +87,12 @@ public class main extends ActionBarActivity {
             else if(contactGrp.getCheckedRadioButtonId() == R.id.numero2) {
                 strContact = "4810"; }
 
-            else if(contactGrp.getCheckedRadioButtonId() == R.id.numero3) {
-                strContact = "0495256023"; }
-
-            else if(contactGrp.getCheckedRadioButtonId() == R.id.numero4) {
-                strContact = "0494493051"; }
-
             else { strContact = "0x0000"; }
-
 
             String aString = idAuto2.getText().toString();
             String zString = idZone2.getText().toString();
 
-            if(contactGrp.getCheckedRadioButtonId() == R.id.numero1 || contactGrp.getCheckedRadioButtonId() == R.id.numero2 ||
-                    contactGrp.getCheckedRadioButtonId() == R.id.numero3 || contactGrp.getCheckedRadioButtonId() == R.id.numero4) {
+            if(contactGrp.getCheckedRadioButtonId() == R.id.numero1 || contactGrp.getCheckedRadioButtonId() == R.id.numero2) {
 
                 if(aString.length() == 0 && zString.length() == 0) {
                     Toast.makeText(main.this, enterValues, Toast.LENGTH_SHORT).show(); }
@@ -115,11 +111,12 @@ public class main extends ActionBarActivity {
         }
     };
 
-    private View.OnClickListener stopWatcher = new View.OnClickListener(){
+    private OnClickListener stopWatcher = new OnClickListener(){
 
         @Override
         public void onClick(View v) {
             sendSms(strContact, "Q");
+            info1.setText("Message \"" + strMessage + "\" envoyé au numéro " + strContact + ".\nMerci !");
 
 //            idzone2.getText().clear();
 //            idauto2.getText().clear();
@@ -137,8 +134,7 @@ public class main extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_settings) {
-            return true; }
+        if(id == R.id.action_settings) { return true; }
 
         return super.onOptionsItemSelected(item);
     }

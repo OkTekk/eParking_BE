@@ -24,9 +24,9 @@
             android:id="@+id/idauto2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/idauto2"
+            android:text="@string/idauto2"
             android:textSize="18sp"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -49,9 +49,9 @@
             android:id="@+id/idzone2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/idzone2"
+            android:text="@string/idzone2"
             android:textSize="18sp"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -77,21 +77,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="@string/numero2" />
-
-        <RadioButton
-            android:id="@+id/numero3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@string/numero3" />
-
-        <RadioButton
-            android:id="@+id/numero4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@string/numero4" />
-    </RadioGroup>
+     </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,7 +106,8 @@
         android:id="@+id/info1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="128sp"
         android:text="@string/info1"
-        android:textSize="18sp"	/>
+        android:textSize="24sp"	/>
 
 </LinearLayout>

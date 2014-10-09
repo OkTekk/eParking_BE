@@ -4,11 +4,13 @@
     <string name="app_name">eParking BE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Préférences</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
 
     <string name="numero1">4411</string>
     <string name="numero2">4810</string>
-    <string name="numero3">Mom</string>
-    <string name="numero4">Val</string>
+    <string name="numero3">Autre</string>
+    <string name="numero4">Entrer un numéro personnalisé :</string>
 
     <string name="idauto1">Immatriculation</string>
     <string name="idauto2">1DLI125</string>

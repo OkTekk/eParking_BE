@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="@string/idauto2"
         android:textSize="18sp"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:layout_toRightOf="@id/idauto1"
         android:layout_toEndOf="@id/idauto1"
         android:layout_alignParentEnd="true"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/idzone2"
         android:textSize="18sp"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:layout_below="@id/idauto2"
         android:layout_toRightOf="@id/idzone1"
         android:layout_toEndOf="@id/idzone1"
@@ -71,19 +71,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/numero2"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/numero3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/numero3"
-            android:textSize="18sp" />
-        <RadioButton
-            android:id="@+id/numero4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/numero4"
             android:textSize="18sp" />
     </RadioGroup>
 
