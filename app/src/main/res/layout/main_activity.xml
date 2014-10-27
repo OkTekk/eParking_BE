@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idAuto1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/idAuto1"
+            android:textSize="16sp"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/idAuto2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/idAuto2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idZone1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/idZone1"
+            android:textSize="16sp"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/idZone2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/idZone2"/>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/contactNums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <RadioButton
+            android:id="@+id/contactLabel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactLabel1"
+            android:textSize="18sp"/>
+
+        <RadioButton
+            android:id="@+id/contactLabel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactLabel2"
+            android:textSize="18sp"/>
+
+        <RadioButton
+            android:id="@+id/contactLabel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactLabel3"
+            android:textSize="18sp"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/parkStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/parkStart"
+            android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/parkStop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/parkStop"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/infoLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/infoLabel"
+            android:textSize="16sp"
+            android:textColor="@color/blue"/>
+
+        <TextView
+            android:id="@+id/infoShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="@string/infoShow"
+            android:textSize="18sp"
+            android:textColor="@color/green"/>
+
+    </LinearLayout>
+
+</LinearLayout>
