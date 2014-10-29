@@ -56,7 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:checkedButton="@+id/contactLabel1" >
 
         <RadioButton
             android:id="@+id/contactLabel1"

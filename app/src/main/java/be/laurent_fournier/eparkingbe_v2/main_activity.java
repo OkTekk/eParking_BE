@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,24 +78,51 @@ public class main_activity extends ActionBarActivity {
     private OnClickListener startWatcher = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            strAuto = idAuto2.getText().toString();
+            strZone = idZone2.getText().toString();
+            strMessage = strAuto + " " + strZone;
 
+            if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1) {
+                strContact = String.valueOf(R.string.contactNum1); }
+
+            else if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2) {
+                strContact = String.valueOf(R.string.contactNum2); }
+
+            else if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel3) {
+                strContact = String.valueOf(R.string.contactNum3); }
+
+            else { strContact = "0x0000"; }
+
+            if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1 || contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2) {
+
+                if(strAuto.length() == 0 && strZone.length() == 0) {
+                    Toast.makeText(main_activity.this, R.string.noValues, Toast.LENGTH_SHORT).show(); }
+
+                else if(strAuto.length() == 0) {
+                    Toast.makeText(main_activity.this, R.string.noIdAuto, Toast.LENGTH_SHORT).show(); }
+
+                else if(strZone.length() == 0) {
+                    Toast.makeText(main_activity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
+
+                else {
+                    sendSms(strContact, strMessage);
+                    infoShow.setText("Message \"" + strMessage + "\" envoyé au numéro " + strContact + ".\nEn attente de confirmation..."); }}
+
+            else { Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
         }
     };
 
     private OnClickListener stopWatcher = new OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            sendSms(strContact, "Q");
+            infoShow.setText("Message d'arrêt envoyé au numéro " + strContact + ".\nMerci !");
         }
     };
 
     public void sendSms(String contact, String message) {
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, main_activity.class), 0);
         SmsManager sms = SmsManager.getDefault();
-
-        if(message == "Q") {
-            sms.sendTextMessage(contact, null, "Q", pi, null); }
-
-        else {sms.sendTextMessage(contact, null, message, pi, null); }
+        sms.sendTextMessage(contact, null, message, pi, null);
     }
 }

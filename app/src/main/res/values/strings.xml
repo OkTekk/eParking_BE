@@ -29,8 +29,8 @@
     <string name="parkStart"><b>Start</b></string>
     <string name="parkStop">Stop</string>
 
-    <string name="infoLabel"><u><b>infoLabel</b></u></string>
-    <string name="infoShow"><i>infoShow</i></string>
+    <string name="infoLabel"><u><b>Informations :</b></u></string>
+    <string name="infoShow"><i>En attente...</i></string>
 
     <string name="timerLabel">timerLabel</string>
     <string name="timerShow">timerShow</string>
