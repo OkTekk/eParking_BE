@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">eParking BE</string>
@@ -30,9 +30,20 @@
     <string name="parkStop">Stop</string>
 
     <string name="infoLabel"><u><b>Informations :</b></u></string>
-    <string name="infoShow"><i>En attente...</i></string>
+    <string name="infoShow"><i>En attente d'une entrée utilisateur...</i></string>
+    <string name="infoShow2">Message \"%1$s\" envoyé au numéro \"%2$s\"</string>
+    <string name="infoEtat"></string>
 
     <string name="timerLabel">timerLabel</string>
     <string name="timerShow">timerShow</string>
+
+    <string name="smsSend_OK">SMS envoyé</string>
+    <string name="smsSend_ERROR_GENERIC_FAILURE">Erreur générale</string>
+    <string name="smsSend_ERROR_NULL_PDU">Texte trop long</string>
+    <string name="smsSend_ERROR_NO_SERVICE">Pas de réseau</string>
+    <string name="smsSend_ERROR_RADIO_OFF">Réseau coupé</string>
+
+    <string name="smsReceive_OK">SMS reçu</string>
+    <string name="smsReceive_CANCELED">SMS non reçu</string>
 
 </resources>

@@ -1,7 +1,10 @@
 package be.laurent_fournier.eparkingbe_v2;
 
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -19,9 +22,7 @@ import android.widget.Toast;
 public class main_activity extends ActionBarActivity {
     private EditText idAuto2 = null, idZone2 = null;
     private RadioGroup contactGrp;
-    private TextView infoShow = null;
-
-    private String strContact = null;
+    private TextView infoShow = null, infoEtat = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class main_activity extends ActionBarActivity {
         stopButton.setOnClickListener(stopWatcher);
 
         infoShow = (TextView)findViewById(R.id.infoShow);
+        infoEtat = (TextView)findViewById(R.id.infoEtat);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -51,7 +53,8 @@ public class main_activity extends ActionBarActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            infoShow.setText(""); }
+            infoShow.setText("");
+            infoEtat.setText(""); }
 
         @Override
         public void afterTextChanged(Editable s) { }
@@ -62,18 +65,6 @@ public class main_activity extends ActionBarActivity {
         public void onClick(View v) {
             String strAuto = idAuto2.getText().toString();
             String strZone = idZone2.getText().toString();
-            String strMessage = strAuto + " " + strZone;
-
-            if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1) {
-                strContact = String.valueOf(R.string.contactNum1); }
-
-            else if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2) {
-                strContact = String.valueOf(R.string.contactNum2); }
-
-            else if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel3) {
-                strContact = String.valueOf(R.string.contactNum3); }
-
-            else { strContact = "0x0000"; }
 
             if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1 || contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2) {
 
@@ -87,8 +78,7 @@ public class main_activity extends ActionBarActivity {
                     Toast.makeText(main_activity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
 
                 else {
-                    sendSms(strContact, strMessage);
-                    infoShow.setText("Message \"" + strMessage + "\" envoyé au numéro " + strContact + ".\nEn attente de confirmation..."); }}
+                    buildSms(strAuto + " " + strZone); }}
 
             else { Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
         }
@@ -97,14 +87,51 @@ public class main_activity extends ActionBarActivity {
     private OnClickListener stopWatcher = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            sendSms(strContact, "Q");
-            infoShow.setText("Message d'arrêt envoyé au numéro " + strContact + ".\nMerci !");
+            buildSms("Q");
         }
     };
 
+    public void buildSms(String message) {
+        String strContact = null;
+
+        switch (contactGrp.getCheckedRadioButtonId()) {
+            case R.id.contactLabel1:    strContact = getString(R.string.contactNum1); break;
+            case R.id.contactLabel2:    strContact = getString(R.string.contactNum2); break;
+            case R.id.contactLabel3:    Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); break;   // To-do
+            default:                    strContact = "0x0000"; break;
+        }
+        sendSms(strContact, message);
+        infoShow.setText(String.format(getString(R.string.infoShow2), message, strContact));
+    }
+
     public void sendSms(String contact, String message) {
-        PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, main_activity.class), 0);
+        PendingIntent sendPi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
+        PendingIntent receivePi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
+
+        registerReceiver(new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode()) {
+                    case ActionBarActivity.RESULT_OK:               infoEtat.setText(R.string.smsSend_OK); break;
+                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:   infoEtat.setText(R.string.smsSend_ERROR_GENERIC_FAILURE); break;
+                    case SmsManager.RESULT_ERROR_NO_SERVICE:        infoEtat.setText(R.string.smsSend_ERROR_NO_SERVICE); break;
+                    case SmsManager.RESULT_ERROR_NULL_PDU:          infoEtat.setText(R.string.smsSend_ERROR_NULL_PDU); break;
+                    case SmsManager.RESULT_ERROR_RADIO_OFF:         infoEtat.setText(R.string.smsSend_ERROR_RADIO_OFF); break;
+                }
+            }
+        }, new IntentFilter("SMS_SENT"));
+
+        registerReceiver(new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context arg0, Intent arg1) {
+                switch (getResultCode()) {
+                    case ActionBarActivity.RESULT_OK:               infoEtat.setText(R.string.smsReceive_OK); break;
+                    case ActionBarActivity.RESULT_CANCELED:         infoEtat.setText(R.string.smsReceive_CANCELED); break;
+                }
+            }
+        }, new IntentFilter("SMS_DELIVERED"));
+
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(contact, null, message, pi, null);
+        sms.sendTextMessage(contact, null, message, sendPi, receivePi);
     }
 }

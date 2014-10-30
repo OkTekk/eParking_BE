@@ -86,8 +86,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/parkStart"
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/infoLabel"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="@color/blue"/>
 
         <TextView
@@ -134,6 +134,16 @@
             android:text="@string/infoShow"
             android:textSize="18sp"
             android:textColor="@color/green"/>
+
+        <TextView
+            android:id="@+id/infoEtat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:text="@string/infoEtat"
+            android:textSize="18sp"
+            android:textColor="@color/purple"/>
 
     </LinearLayout>
 
