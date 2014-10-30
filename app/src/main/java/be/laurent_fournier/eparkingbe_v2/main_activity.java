@@ -15,17 +15,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Lowlow on 20/10/2014.
- */
 
 public class main_activity extends ActionBarActivity {
     private EditText idAuto2 = null, idZone2 = null;
     private RadioGroup contactGrp;
-    private Button startButton, stopButton;
     private TextView infoShow = null;
 
-    private String strContact = null, strMessage = null, strAuto = null, strZone = null;
+    private String strContact = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +36,10 @@ public class main_activity extends ActionBarActivity {
 
         contactGrp = (RadioGroup)findViewById(R.id.contactNums);
 
-        startButton = (Button)findViewById(R.id.parkStart);
+        Button startButton = (Button)findViewById(R.id.parkStart);
         startButton.setOnClickListener(startWatcher);
 
-        stopButton = (Button)findViewById(R.id.parkStop);
+        Button stopButton = (Button)findViewById(R.id.parkStop);
         stopButton.setOnClickListener(stopWatcher);
 
         infoShow = (TextView)findViewById(R.id.infoShow);
@@ -55,8 +51,7 @@ public class main_activity extends ActionBarActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            infoShow.setText("");
-        }
+            infoShow.setText(""); }
 
         @Override
         public void afterTextChanged(Editable s) { }
@@ -65,9 +60,9 @@ public class main_activity extends ActionBarActivity {
     private OnClickListener startWatcher = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            strAuto = idAuto2.getText().toString();
-            strZone = idZone2.getText().toString();
-            strMessage = strAuto + " " + strZone;
+            String strAuto = idAuto2.getText().toString();
+            String strZone = idZone2.getText().toString();
+            String strMessage = strAuto + " " + strZone;
 
             if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1) {
                 strContact = String.valueOf(R.string.contactNum1); }
