@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">eParking BE</string>
@@ -6,7 +6,7 @@
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
 
-    <string name="noIdAuto">Veuillez entrer un numéro de plaque\nSans espaces ni traits d'union.</string>
+    <string name="noIdAuto">Veuillez entrer un numéro de plaque\nSans espaces ni traits d\'union.</string>
     <string name="noIdZone">Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.</string>
     <string name="noContact">Veuillez cocher un des numéros de contact.</string>
     <string name="noValues">Veuillez entrer des valeurs !</string>
