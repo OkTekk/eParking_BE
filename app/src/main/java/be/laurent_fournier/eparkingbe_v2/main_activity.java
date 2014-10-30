@@ -78,7 +78,7 @@ public class main_activity extends ActionBarActivity {
                     Toast.makeText(main_activity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
 
                 else {
-                    buildSms(strAuto + " " + strZone); }}
+                    buildSms(strZone + " " + strAuto); }}
 
             else { Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
         }

@@ -30,7 +30,7 @@
     <string name="parkStop">Stop</string>
 
     <string name="infoLabel"><u><b>Informations :</b></u></string>
-    <string name="infoShow"><i>En attente d'une entrée utilisateur...</i></string>
+    <string name="infoShow"><i>En attente d\'une entrée utilisateur...</i></string>
     <string name="infoShow2">Message \"%1$s\" envoyé au numéro \"%2$s\"</string>
     <string name="infoEtat"></string>
 
