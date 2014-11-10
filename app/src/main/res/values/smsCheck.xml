@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="smsSend_OK">SMS envoyé</string>
+    <string name="smsSend_ERROR_GENERIC_FAILURE">Erreur générale</string>
+    <string name="smsSend_ERROR_NULL_PDU">Texte trop long</string>
+    <string name="smsSend_ERROR_NO_SERVICE">Pas de réseau</string>
+    <string name="smsSend_ERROR_RADIO_OFF">Réseau coupé</string>
+
+    <string name="smsReceive_OK">SMS reçu</string>
+    <string name="smsReceive_CANCELED">SMS non reçu</string>
+
+</resources>

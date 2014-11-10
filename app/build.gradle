@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '21.0.2'
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "be.laurent_fournier.eparkingbe_v2"
-        minSdkVersion 7
-        targetSdkVersion 19
+        applicationId "be.laurent_fournier.eparkingbe_v3"
+        minSdkVersion 8
+        targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "2.3"
     }
     buildTypes {
         release {
@@ -21,5 +21,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
 }

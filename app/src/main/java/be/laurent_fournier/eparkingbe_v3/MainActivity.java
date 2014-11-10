@@ -1,4 +1,4 @@
-package be.laurent_fournier.eparkingbe_v2;
+package be.laurent_fournier.eparkingbe_v3;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class main_activity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity {
     private EditText idAuto2 = null, idZone2 = null;
     private RadioGroup contactGrp;
     private TextView infoShow = null, infoEtat = null;
@@ -27,7 +28,7 @@ public class main_activity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
 
         idAuto2 = (EditText)findViewById(R.id.idAuto2);
         idAuto2.addTextChangedListener(textWatcher);
@@ -60,7 +61,7 @@ public class main_activity extends ActionBarActivity {
         public void afterTextChanged(Editable s) { }
     };
 
-    private OnClickListener startWatcher = new OnClickListener() {
+    private View.OnClickListener startWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String strAuto = idAuto2.getText().toString();
@@ -69,22 +70,22 @@ public class main_activity extends ActionBarActivity {
             if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1 || contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2) {
 
                 if(strAuto.length() == 0 && strZone.length() == 0) {
-                    Toast.makeText(main_activity.this, R.string.noValues, Toast.LENGTH_SHORT).show(); }
+                    Toast.makeText(MainActivity.this, R.string.noValues, Toast.LENGTH_SHORT).show(); }
 
                 else if(strAuto.length() == 0) {
-                    Toast.makeText(main_activity.this, R.string.noIdAuto, Toast.LENGTH_SHORT).show(); }
+                    Toast.makeText(MainActivity.this, R.string.noIdAuto, Toast.LENGTH_SHORT).show(); }
 
                 else if(strZone.length() == 0) {
-                    Toast.makeText(main_activity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
+                    Toast.makeText(MainActivity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
 
                 else {
                     buildSms(strZone + " " + strAuto); }}
 
-            else { Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
+            else { Toast.makeText(MainActivity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
         }
     };
 
-    private OnClickListener stopWatcher = new OnClickListener() {
+    private View.OnClickListener stopWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             buildSms("Q");
@@ -97,8 +98,8 @@ public class main_activity extends ActionBarActivity {
         switch (contactGrp.getCheckedRadioButtonId()) {
             case R.id.contactLabel1:    strContact = getString(R.string.contactNum1); break;
             case R.id.contactLabel2:    strContact = getString(R.string.contactNum2); break;
-            case R.id.contactLabel3:    Toast.makeText(main_activity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); break;   // To-do
-            default:                    strContact = "0x0000"; break;
+            case R.id.contactLabel3:    Toast.makeText(MainActivity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); break;   // To-do
+            default:                    Toast.makeText(MainActivity.this, R.string.badNum, Toast.LENGTH_LONG).show(); break;
         }
         sendSms(strContact, message);
         infoShow.setText(String.format(getString(R.string.infoShow2), message, strContact));
@@ -133,5 +134,27 @@ public class main_activity extends ActionBarActivity {
 
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(contact, null, message, sendPi, receivePi);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

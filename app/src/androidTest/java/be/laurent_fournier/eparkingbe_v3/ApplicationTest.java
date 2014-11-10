@@ -1,4 +1,4 @@
-package be.laurent_fournier.eparkingbe_v2;
+package be.laurent_fournier.eparkingbe_v3;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
