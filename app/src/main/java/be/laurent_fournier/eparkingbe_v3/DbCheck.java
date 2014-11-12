@@ -23,7 +23,7 @@ public class DbCheck extends SQLiteOpenHelper {
     public static final String COLUMN_IDz = "_id";
     public static final String COLUMN_NAMEz = "name";
     public static final String COLUMN_ZONEIDz = "zoneid";
-    public static final String COLUMN_DISTRIz = "distributor";
+    public static final String COLUMN_PROVIDERz = "provider";
     public static final String COLUMN_GEOPOSz = "geoposition";
 
     public static final String TABLE_AUTO = "auto";
@@ -47,7 +47,7 @@ public class DbCheck extends SQLiteOpenHelper {
 
     private static final String ZONE_CREATE = "create table " + TABLE_ZONE
             + "(" + COLUMN_IDz + " integer primary key autoincrement, " + COLUMN_NAMEz + " text not null, "
-            + COLUMN_ZONEIDz + " text, " + COLUMN_DISTRIz + " integer, " + COLUMN_GEOPOSz + "text);";
+            + COLUMN_ZONEIDz + " text not null, " + COLUMN_PROVIDERz + " integer not null, " + COLUMN_GEOPOSz + "text);";
 
     private static final String AUTO_CREATE = "create table " + TABLE_AUTO
             + "(" + COLUMN_IDa + " integer primary key autoincrement, " + COLUMN_AUTOIDa + " text not null, " + COLUMN_GEOPOSa + " text);";
@@ -74,8 +74,11 @@ public class DbCheck extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(DbCheck.class.getName(),
-                "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+                "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.\n!!! EXCEPT HISTORY TABLE !!!");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_AUTO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ZONE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUFFER);
         onCreate(db);
     }
 }

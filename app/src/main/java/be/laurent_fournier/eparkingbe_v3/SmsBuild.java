@@ -12,14 +12,14 @@ import android.widget.Toast;
 
 public class SmsBuild extends ActionBarActivity {
     private RadioGroup contactGrp;
-    private TextView infoShow = null;
     private SmsSend sendingRequest;
+    private TextView infoShow;
 
     public SmsBuild(String message) {
         String strContact = null;
 
-        contactGrp = (RadioGroup)findViewById(R.id.contactNums);
-        infoShow = (TextView)findViewById(R.id.infoShow);
+        contactGrp = (RadioGroup) findViewById(R.id.contactNums);
+        infoShow = (TextView) findViewById(R.id.infoShow);
 
         switch (contactGrp.getCheckedRadioButtonId()) {
             case R.id.contactLabel1:    strContact = getString(R.string.contactNum1); break;
