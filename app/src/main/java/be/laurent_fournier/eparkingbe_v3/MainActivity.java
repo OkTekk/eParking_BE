@@ -20,11 +20,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+/**
+ * Created by Lowlow on 11/11/2014.
+ * Version ${VERSION}.
+ *
+ * 1st serious project of mine ^_^
+ * eParking BE tend to be useful to lazy Belgian people
+ * It's function is to ease the use of 'SMS paied parking'
+ * in all the country.
+ * There is already one -maked by one of the two existing
+ * plateforms- but it take 0.30€ by transaction !
+ *
+ * All comments: http://www.laurent-fournier.be/wp/forums/topic/dev-perso-eparking-be/
+ */
+
 public class MainActivity extends ActionBarActivity {
     private EditText idAuto2 = null, idZone2 = null;
     private RadioGroup contactGrp;
     private TextView infoShow = null, infoEtat = null;
 
+    private SmsBuild buildingRequest = null;
+
+    /***********************************************************************************
+     * First, create/define the instance call and every usable objects from the layout *
+     ***********************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +67,12 @@ public class MainActivity extends ActionBarActivity {
         infoEtat = (TextView)findViewById(R.id.infoEtat);
     }
 
+    /***********************************************************
+     * Listen on texts.                                        *
+     * Actually i just use it for cleaning writing fields      *
+     * Soon (...) all listeners like this one will be placed   *
+     * in a dedicated class (ListenersMain.java)               *
+     ***********************************************************/
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -61,6 +86,14 @@ public class MainActivity extends ActionBarActivity {
         public void afterTextChanged(Editable s) { }
     };
 
+    /***************************************************************
+     * Listen on Start & Stop buttons's clicks                     *
+     * This one and the Stop one will be in ListenersMain.java     *
+     ***************************************************************
+     * Start: Make verifs to be sure every needed field is filled  *
+     *        if so, concatenate values required for buildSms()    *
+     * Stop: Actually just do the minimum xD                       *
+     ***************************************************************/
     private View.OnClickListener startWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,19 +112,25 @@ public class MainActivity extends ActionBarActivity {
                     Toast.makeText(MainActivity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
 
                 else {
-                    buildSms(strZone + " " + strAuto); }}
+//                    buildSms(strZone + " " + strAuto); }
+                    buildingRequest = new SmsBuild(strZone + " " + strAuto); }}
 
             else { Toast.makeText(MainActivity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
         }
     };
 
+    /* See above, startWatcher, for this comment */
     private View.OnClickListener stopWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buildSms("Q");
+//            buildSms("Q");
+            buildingRequest = new SmsBuild("Q");
         }
     };
 
+    /****************************************************
+     * Extracted to an independant class: SmsBuild.java *
+     ****************************************************
     public void buildSms(String message) {
         String strContact = null;
 
@@ -104,7 +143,11 @@ public class MainActivity extends ActionBarActivity {
         sendSms(strContact, message);
         infoShow.setText(String.format(getString(R.string.infoShow2), message, strContact));
     }
+     */
 
+    /****************************************************
+     * Extracted to an independant class: SmsSend.java  *
+     ****************************************************
     public void sendSms(String contact, String message) {
         PendingIntent sendPi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
         PendingIntent receivePi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
@@ -135,19 +178,22 @@ public class MainActivity extends ActionBarActivity {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(contact, null, message, sendPi, receivePi);
     }
+     */
 
+    /* To-do */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /* Inflate the menu; this adds items to the action bar if it is present. */
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /* To-do */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        /* Handle action bar item clicks here. The action bar will
+           automatically handle clicks on the Home/Up button, so long
+           as you specify a parent activity in AndroidManifest.xml. */
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

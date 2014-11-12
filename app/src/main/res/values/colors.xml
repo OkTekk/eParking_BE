@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="red">#FF0000</color>
-    <color name="blue">#046380</color>
-    <color name="green">#96CA2D</color>
     <color name="black">#000000</color>
+    <color name="darkGrey">#404040</color>
+    <color name="grey">#808080</color>
+    <color name="lightGrey">#B8B8B8</color>
+    <color name="whiteSmoke">#F5F5F5</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="red">#FF0000</color>
+    <color name="wildStrawberry">#FF43A4</color>
+    <color name="wildOrchid">#D470A2</color>
+    <color name="tangelo">#F94D00</color>
+    <color name="lightTangelo">#FFB077</color>
+
+    <color name="yellowOrange">#FFAE42</color>
+    <color name="woodBrown">#C19A6B</color>
+    <color name="darkBrown">#321414</color>
+    <color name="brown">#80461B</color>
+    <color name="lightBrown">#836953</color>
+    <color name="wine">#722F37</color>
+    <color name="windsorTan">#A75502</color>
+    <color name="sienna">#882D17</color>
+
+    <color name="yellowBrown">#BD8D46</color>
+    <color name="vanilla">#F3E5AB</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#96CA2D</color>
+
+    <color name="sapGreen">#507D2A</color>
+    <color name="seaGreen">#2E8B57</color>
+    <color name="verdigris">#43B3AE</color>
+    <color name="blueGreen">#009698</color>
+    <color name="greenBlue">#046380</color>
+
+
+    <color name="vividCerulean">#00aaee</color>
+    <color name="wildBlue">#A2ADD0</color>
+    <color name="vistaBlue">#7C9ED9</color>
+    <color name="violetBlue">#324AB2</color>
+    <color name="lightAzure">#74BBFB</color>
+    <color name="darkBlue">#1D2951</color>
+    <color name="lightBlue">#6666FF</color>
+    <color name="violet">#7F00FF</color>
     <color name="purple">#A901DB</color>
-    <color name="brown">#BD8D46</color>
 
 </resources>

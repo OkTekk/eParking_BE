@@ -22,7 +22,7 @@
             android:gravity="center_vertical"
             android:text="@string/idAuto1"
             android:textSize="16sp"
-            android:textColor="@color/red"/>
+            android:textColor="@color/lightAzure"/>
 
         <EditText
             android:id="@+id/idAuto2"
@@ -45,7 +45,7 @@
             android:gravity="center_vertical"
             android:text="@string/idZone1"
             android:textSize="16sp"
-            android:textColor="@color/red"/>
+            android:textColor="@color/lightAzure"/>
 
         <EditText
             android:id="@+id/idZone2"
@@ -101,9 +101,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/parkStart"
+            android:text=""
             android:textSize="30sp"
-            tools:ignore="NestedWeights" />
+            android:background="@drawable/left" />
 
         <Button
             android:id="@+id/parkStop"
@@ -111,8 +111,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/parkStop"
-            android:textSize="30sp"/>
+            android:text=""
+            android:textSize="30sp"
+            android:background="@drawable/right"/>
 
     </LinearLayout>
 
@@ -130,7 +131,7 @@
             android:gravity="center_horizontal"
             android:text="@string/infoLabel"
             android:textSize="20sp"
-            android:textColor="@color/blue"/>
+            android:textColor="@color/wildBlue"/>
 
         <TextView
             android:id="@+id/infoShow"
@@ -140,7 +141,7 @@
             android:gravity="center_horizontal"
             android:text="@string/infoShow"
             android:textSize="18sp"
-            android:textColor="@color/green"/>
+            android:textColor="@color/verdigris"/>
 
         <TextView
             android:id="@+id/infoEtat"
@@ -150,7 +151,7 @@
             android:gravity="center_horizontal"
             android:text="@string/infoEtat"
             android:textSize="18sp"
-            android:textColor="@color/purple"/>
+            android:textColor="@color/wildStrawberry"/>
 
     </LinearLayout>
 
