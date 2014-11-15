@@ -9,6 +9,12 @@ public class User {
     private int userId = 0;
     private String userName = null, userPassword = null;
 
+    public User(int userId, String userName, String userPassword) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
     public int getId() {
         return userId;
     }

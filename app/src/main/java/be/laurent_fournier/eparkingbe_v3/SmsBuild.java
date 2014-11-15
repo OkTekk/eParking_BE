@@ -13,13 +13,13 @@ import android.widget.Toast;
 public class SmsBuild extends ActionBarActivity {
     private RadioGroup contactGrp;
     private SmsSend sendingRequest;
-    private TextView infoShow;
+    private TextView infoShow, infoEtat;
 
-    public SmsBuild(String message) {
+    public SmsBuild(String message, RadioGroup contactGrp, TextView infoShow, TextView infoEtat) {
         String strContact = null;
-
-        contactGrp = (RadioGroup) findViewById(R.id.contactNums);
-        infoShow = (TextView) findViewById(R.id.infoShow);
+        this.contactGrp = contactGrp;
+        this.infoShow = infoShow;
+        this.infoEtat = infoEtat;
 
         switch (contactGrp.getCheckedRadioButtonId()) {
             case R.id.contactLabel1:    strContact = getString(R.string.contactNum1); break;
@@ -28,7 +28,7 @@ public class SmsBuild extends ActionBarActivity {
             default:                    Toast.makeText(this, R.string.badNum, Toast.LENGTH_LONG).show(); break;
         }
 
-        sendingRequest = new SmsSend(strContact, message);
+        new SmsSend(strContact, message, infoEtat);
         infoShow.setText(String.format(getString(R.string.infoShow2), message, strContact));
     }
 }

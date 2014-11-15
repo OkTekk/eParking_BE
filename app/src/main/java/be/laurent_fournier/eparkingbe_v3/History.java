@@ -9,6 +9,11 @@ public class History {
     private int historyId = 0;
     private String historyTable = null;
 
+    public History(int historyId, String historyTable) {
+        this.historyId = historyId;
+        this.historyTable = historyTable;
+    }
+
     public int getHistoryId() {
         return historyId;
     }

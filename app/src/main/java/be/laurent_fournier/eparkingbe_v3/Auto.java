@@ -9,6 +9,12 @@ public class Auto {
     private int autoId = 0;
     private String autoLicense = null, autoGeoposition = null;
 
+    public Auto(int autoId, String autoLicense, String autoGeoposition) {
+        this.autoId = autoId;
+        this.autoLicense = autoLicense;
+        this.autoGeoposition = autoGeoposition;
+    }
+
     public int getAutoId() {
         return autoId;
     }

@@ -16,11 +16,11 @@ import android.widget.TextView;
 public class SmsSend extends ActionBarActivity {
     private TextView infoEtat = null;
 
-    public SmsSend(String contact, String message) {
+    public SmsSend(String contact, String message, final TextView infoEtat) {
+        this.infoEtat = infoEtat;
+
         PendingIntent sendPi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
         PendingIntent receivePi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_DELIVERED"), 0);
-
-        infoEtat = (TextView)findViewById(R.id.infoEtat);
 
         registerReceiver(new BroadcastReceiver(){
             @Override

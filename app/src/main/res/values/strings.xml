@@ -2,13 +2,18 @@
 <resources>
 
     <string name="app_name">eParking BE</string>
-    <string name="action_settings">Préférences</string>
+    <string name="action_settings">Pour le moment y\'a rien</string>
+    <string name="action_settings2">Mais ça va changer</string>
+    <string name="action_settings3">Promis !</string>
+    <string name="EPARKING_PREFS">eParking_Prefs</string>
+    <string name="username">Votre nom :</string>
+    <string name="license">Votre immatriculation :</string>
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
 
     <string name="noIdAuto">Veuillez entrer un numéro de plaque\nSans espaces ni traits d\'union.</string>
     <string name="noIdZone">Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.</string>
-    <string name="noContact">Actuellement indisponible...</string>
+    <string name="noContact">Actuellement indisponible…</string>
     <string name="noValues">Veuillez entrer des valeurs !</string>
 
     <string name="contactNum1">4810</string>

@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/idAuto1"
-            android:textSize="16sp"
-            android:textColor="@color/lightAzure"/>
+            android:textSize="18sp"
+            android:textColor="@color/greenBlue"/>
 
         <EditText
             android:id="@+id/idAuto2"
@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/idZone1"
-            android:textSize="16sp"
-            android:textColor="@color/lightAzure"/>
+            android:textSize="18sp"
+            android:textColor="@color/greenBlue"/>
 
         <EditText
             android:id="@+id/idZone2"
@@ -131,7 +131,7 @@
             android:gravity="center_horizontal"
             android:text="@string/infoLabel"
             android:textSize="20sp"
-            android:textColor="@color/wildBlue"/>
+            android:textColor="@color/greenBlue"/>
 
         <TextView
             android:id="@+id/infoShow"
@@ -147,7 +147,7 @@
             android:id="@+id/infoEtat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:gravity="center_horizontal"
             android:text="@string/infoEtat"
             android:textSize="18sp"

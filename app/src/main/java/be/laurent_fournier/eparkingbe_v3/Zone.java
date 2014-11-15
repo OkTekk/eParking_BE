@@ -9,8 +9,12 @@ public class Zone {
     private int zoneId = 0, zoneProvider = 0;
     private String zoneName = null, zoneCode = null, zoneGeoposition = null;
 
-    public int getZoneId() {
-        return zoneId;
+    public Zone(int zoneId, String zoneName, String zoneCode, int zoneProvider, String zoneGeoposition) {
+        this.zoneId = zoneId;
+        this.zoneName = zoneName;
+        this.zoneCode = zoneCode;
+        this.zoneProvider = zoneProvider;
+        this.zoneGeoposition = zoneGeoposition;
     }
 
     public void setZoneId(int zoneId) {

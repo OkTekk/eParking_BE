@@ -14,71 +14,51 @@ import android.util.Log;
  */
 
 public class DbCheck extends SQLiteOpenHelper {
-    public static final String TABLE_USER = "user";
-    public static final String COLUMN_IDu = "_id";
-    public static final String COLUMN_NAMEu = "name";
-    public static final String COLUMN_PASSu = "password";
-
-    public static final String TABLE_ZONE = "zone";
-    public static final String COLUMN_IDz = "_id";
-    public static final String COLUMN_NAMEz = "name";
-    public static final String COLUMN_ZONEIDz = "zoneid";
-    public static final String COLUMN_PROVIDERz = "provider";
-    public static final String COLUMN_GEOPOSz = "geoposition";
-
-    public static final String TABLE_AUTO = "auto";
-    public static final String COLUMN_IDa = "_id";
-    public static final String COLUMN_AUTOIDa = "autoid";
-    public static final String COLUMN_GEOPOSa = "geoposition";
-
-    public static final String TABLE_BUFFER = "buffer";
-    public static final String COLUMN_IDb = "_id";
-    public static final String COLUMN_BUFFERb = "buffer";
-
-    public static final String TABLE_HISTORY = "history";
-    public static final String COLUMN_IDh = "_id";
-    public static final String COLUMN_HISTORYh = "history";
-
     private static final String DATABASE_NAME = "eParking.db";
     private static final int DATABASE_VERSION = 1;
-
-    private static final String USER_CREATE = "create table " + TABLE_USER
-            + "(" + COLUMN_IDu + " integer primary key autoincrement, " + COLUMN_NAMEu + " text not null, " + COLUMN_PASSu + " text);";
-
-    private static final String ZONE_CREATE = "create table " + TABLE_ZONE
-            + "(" + COLUMN_IDz + " integer primary key autoincrement, " + COLUMN_NAMEz + " text not null, "
-            + COLUMN_ZONEIDz + " text not null, " + COLUMN_PROVIDERz + " integer not null, " + COLUMN_GEOPOSz + "text);";
-
-    private static final String AUTO_CREATE = "create table " + TABLE_AUTO
-            + "(" + COLUMN_IDa + " integer primary key autoincrement, " + COLUMN_AUTOIDa + " text not null, " + COLUMN_GEOPOSa + " text);";
-
-    private static final String BUFFER_CREATE = "create table " + TABLE_BUFFER
-            + "(" + COLUMN_IDb + " integer primary key autoincrement, " + COLUMN_BUFFERb + " text);";
-
-    private static final String HISTORY_CREATE = "create table " + TABLE_HISTORY
-            + "(" + COLUMN_IDh + " integer primary key autoincrement, " + COLUMN_HISTORYh + " text);";
 
     public DbCheck(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /* *********************************************************
+     * Define the commands to Create tables and their columns  *
+     * As well as setting a few data                           *
+     * *********************************************************/
     @Override
-    public void onCreate(SQLiteDatabase database) {
-        database.execSQL(USER_CREATE);
-        database.execSQL(ZONE_CREATE);
-        database.execSQL(AUTO_CREATE);
-        database.execSQL(BUFFER_CREATE);
-        database.execSQL(HISTORY_CREATE);
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE user (_id integer primary key autoincrement, name text not null, password text);");
+        db.execSQL("CREATE TABLE zone (_id integer primary key autoincrement, name text not null, zoneid text not null, provider integer not null, geoposition text);");
+        db.execSQL("CREATE TABLE auto (_id integer primary key autoincrement, autoid text not null, geoposition text);");
+        db.execSQL("CREATE TABLE buffer (_id integer primary key autoincrement, iduser integer, idzone integer, idauto integer, buffer text);");
+        db.execSQL("CREATE TABLE history (_id integer primary key autoincrement, history text);");
+
+        db.execSQL("INSERT INTO user (_id, name) VALUES (null, 'Lowlow')");
+        db.execSQL("INSERT INTO user (_id, name) VALUES (null, 'Lupi')");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER1', 1)");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER2', 1)");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER3', 1)");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Liège', 'LIE1', 2)");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Liège', 'LIE1', 2)");
+        db.execSQL("INSERT INTO auto (_id, autoid) VALUES (null, '1DLI125')");
+        db.execSQL("INSERT INTO auto (_id, autoid) VALUES (null, '1AWR849')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(DbCheck.class.getName(),
-                "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.\n!!! EXCEPT HISTORY TABLE !!!");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_AUTO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ZONE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUFFER);
+                "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.");
+
+        db.execSQL("DROP TABLE IF EXISTS user");
+        db.execSQL("DROP TABLE IF EXISTS zone");
+        db.execSQL("DROP TABLE IF EXISTS auto");
+        db.execSQL("DROP TABLE IF EXISTS buffer");
+        db.execSQL("DROP TABLE IF EXISTS history");
+
         onCreate(db);
+    }
+
+    public static int getDatabaseVersion() {
+        return DATABASE_VERSION;
     }
 }
