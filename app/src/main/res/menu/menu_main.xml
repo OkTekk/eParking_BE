@@ -11,8 +11,10 @@
         <menu>
             <item android:id="@+id/create_new"
                 android:title="@string/action_settings2" />
+
             <item android:id="@+id/open"
                 android:title="@string/action_settings3" />
         </menu>
+
     </item>
 </menu>

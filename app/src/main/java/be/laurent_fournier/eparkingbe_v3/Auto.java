@@ -15,6 +15,11 @@ public class Auto {
         this.autoGeoposition = autoGeoposition;
     }
 
+    public Auto(String autoLicense, String autoGeoposition) {
+        this.autoLicense = autoLicense;
+        this.autoGeoposition = autoGeoposition;
+    }
+
     public int getAutoId() {
         return autoId;
     }
@@ -41,6 +46,6 @@ public class Auto {
 
     @Override
     public String toString() {
-        return "Auto ID = " + autoId + ", Auto License = " + autoLicense + ", Auto Geoposition = " + autoGeoposition;
+        return autoLicense;
     }
 }

@@ -60,12 +60,7 @@ public class Buffer {
 
     @Override
     public String toString() {
-        return "Buffer{" +
-                "bufferId=" + bufferId +
-                ", userId=" + userId +
-                ", zoneId=" + zoneId +
-                ", autoId=" + autoId +
-                ", bufferTable='" + bufferTable + '\'' +
-                '}';
+        return "Buffer{" + "bufferId=" + bufferId + ", userId=" + userId + ", zoneId=" +
+                zoneId + ", autoId=" + autoId + ", bufferTable='" + bufferTable + '\'' + '}';
     }
 }

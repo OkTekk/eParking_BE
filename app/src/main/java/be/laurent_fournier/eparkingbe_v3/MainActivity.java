@@ -13,12 +13,12 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -26,25 +26,25 @@ import android.widget.Toast;
  * Version ${VERSION}.
  *
  * 1st serious project of mine ^_^
- * eParking BE tend to be useful to lazy Belgian people
- * It's function is to ease the use of 'SMS paied parking'
+ * eParking BE tend to be useful to lazy Belgians
+ * Its function is to ease the use of 'Parking's SMS payment'
  * in all the country.
- * There is already one -maked by one of the two existing
- * plateforms- but it take 0.30€ by transaction !
+ * There is already one -created by one of the two existing
+ * plateforms- but it take 0.30€ by transaction
+ * in addition to SMS price and time of actual parking !
  *
  * All comments: http://www.laurent-fournier.be/wp/forums/topic/dev-perso-eparking-be/
  **/
 
 public class MainActivity extends ActionBarActivity {
-    private EditText idAuto2 = null, idZone2 = null;
+    private Spinner idAuto2 = null, idZone2 = null;
     private RadioGroup contactGrp;
     private TextView infoShow = null, infoEtat = null;
 
     private DbQueries dbQueries;
     private User user; private Zone zone; private Auto auto;
-    private Buffer buffer; private History history;
 
-//    private static final String EPARKING_PREFS = "eParking_Prefs";
+//    private static final String general_prefs = "GeneralPrefs";
 
 
     /* *********************************************************************************
@@ -62,20 +62,20 @@ public class MainActivity extends ActionBarActivity {
 
         dbQueries = new DbQueries(this);
         dbQueries.open();
-        user = dbQueries.getUser();
-        ArrayAdapter<Zone> arrayAdapter = new ArrayAdapter<Zone>(this, android.R.layout.simple_spinner_item, dbQueries.getZones());
-        auto = dbQueries.getAuto();
-        buffer = dbQueries.getBuffer();
-        history = dbQueries.getHistory();
+        ArrayAdapter<User> arrayUser = new ArrayAdapter<User>(this, android.R.layout.simple_spinner_item, dbQueries.getUsers());
+        ArrayAdapter<Zone> arrayZone = new ArrayAdapter<Zone>(this, android.R.layout.simple_spinner_item, dbQueries.getZones());
+        ArrayAdapter<Auto> arrayAuto = new ArrayAdapter<Auto>(this, android.R.layout.simple_spinner_item, dbQueries.getAutos());
         dbQueries.close();
 
-        idAuto2 = (EditText)findViewById(R.id.idAuto2);
-        idAuto2.addTextChangedListener(textWatcher);
+        idAuto2 = (Spinner)findViewById(R.id.idAuto2);
+        arrayAuto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        idAuto2.setAdapter(arrayAuto);
+        idAuto2.setOnItemSelectedListener(onAutoSelectedListener);
 
-        idZone2 = (EditText)findViewById(R.id.idZone2);
-        idZone2.addTextChangedListener(textWatcher);
-
-        contactGrp = (RadioGroup)findViewById(R.id.contactNums);
+        idZone2 = (Spinner)findViewById(R.id.idZone2);
+        arrayZone.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        idZone2.setAdapter(arrayZone);
+        idZone2.setOnItemSelectedListener(onZoneSelectedListener);
 
         Button startButton = (Button)findViewById(R.id.parkStart);
         startButton.setOnClickListener(startWatcher);
@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
 
     /* *********************************************************************************
      * Listen on texts.                                                                *
-     * Actually i just use it to cleaning the fields                                   *
+     * Actually i just use it to clean the fields                                      *
      * Soon (...) all listeners like this one will be placed                           *
      * in a dedicated class (ListenersMain.java)                                       *
      * *********************************************************************************/
@@ -101,7 +101,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             infoShow.setText("");
-            infoEtat.setText(""); }
+            infoEtat.setText("");
+        }
 
         @Override
         public void afterTextChanged(Editable s) { }
@@ -110,46 +111,48 @@ public class MainActivity extends ActionBarActivity {
 
     /* *********************************************************************************
      * Listen on Start & Stop buttons's clicks                                         *
-     * This one and the Stop one will be in ListenersMain.java                         *
-     * *********************************************************************************
-     * Start: Make verifs to be sure every needed field is filled                      *
-     *        if so, concatenate values required for buildSms()                        *
-     * Stop: Actually just do the minimum xD                                           *
+     * Later, they will be in ListenersMain.java                                       *
      * *********************************************************************************/
     private View.OnClickListener startWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String strAuto = idAuto2.getText().toString();
-            String strZone = idZone2.getText().toString();
-
-            if(contactGrp.getCheckedRadioButtonId() == R.id.contactLabel1
-                    || contactGrp.getCheckedRadioButtonId() == R.id.contactLabel2
-                    || contactGrp.getCheckedRadioButtonId() == R.id.contactLabel3) {
-
-                if(strAuto.length() == 0 && strZone.length() == 0) {
-                    Toast.makeText(MainActivity.this, R.string.noValues, Toast.LENGTH_SHORT).show(); }
-
-                else if(strAuto.length() == 0) {
-                    Toast.makeText(MainActivity.this, R.string.noIdAuto, Toast.LENGTH_SHORT).show(); }
-
-                else if(strZone.length() == 0) {
-                    Toast.makeText(MainActivity.this, R.string.noIdZone, Toast.LENGTH_SHORT).show(); }
-
-                else { SmsBuild(strZone + " " + strAuto); }}
-
-            else { Toast.makeText(MainActivity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); }
+           SmsBuild(zone.getZoneCode() + " " + auto.getAutoLicense());
         }
     };
 
-
-    /* *********************************************************************************
-     * See above, startWatcher, for this comment                                       *
-     * *********************************************************************************/
     private View.OnClickListener stopWatcher = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             SmsBuild("Q");
         }
+    };
+
+    /* *********************************************************************************
+     * Listen on Spinner selections                                                    *
+     * And set last selected into buffer table to recover them  at th next launch      *
+     * *********************************************************************************/
+    private AdapterView.OnItemSelectedListener onZoneSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            zone = (Zone)parentView.getItemAtPosition(position);
+
+/*            dbQueries.open();
+            dbQueries.
+            dbQueries.close();*/
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parentView) {}
+    };
+
+    private AdapterView.OnItemSelectedListener onAutoSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            auto = (Auto)parentView.getItemAtPosition(position);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parentView) {}
     };
 
 
@@ -159,13 +162,10 @@ public class MainActivity extends ActionBarActivity {
      * *********************************************************************************/
     public void SmsBuild(String message) {
         String strContact = null;
+        if(zone.getZoneProvider() == 1) { strContact = "4810"; }
+        else if(zone.getZoneProvider() == 2) { strContact = "4411"; }
+        else { infoShow.setText(String.format(getString(R.string.badNum))); }
 
-        switch (contactGrp.getCheckedRadioButtonId()) {
-            case R.id.contactLabel1:    strContact = getString(R.string.contactNum1); break;
-            case R.id.contactLabel2:    strContact = getString(R.string.contactNum2); break;
-            case R.id.contactLabel3:    Toast.makeText(MainActivity.this, R.string.noContact, Toast.LENGTH_SHORT).show(); break;   // To-do
-            default:                    Toast.makeText(MainActivity.this, R.string.badNum, Toast.LENGTH_LONG).show(); break;
-        }
         SmsSend(strContact, message);
         infoShow.setText(String.format(getString(R.string.infoShow2), message, strContact));
     }
@@ -173,7 +173,7 @@ public class MainActivity extends ActionBarActivity {
 
     /* *********************************************************************************
      * TO-DO :                                                                         *
-     * Extracted to an independant class: SmsSend.java                                 *
+     * Extract the methods to an independant class                                     *
      * *********************************************************************************/
     public void SmsSend(String contact, String message) {
         PendingIntent sendPi = PendingIntent.getBroadcast(this, 0, new Intent("SMS_SENT"), 0);
@@ -229,8 +229,7 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         // noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true; }
+        if (id == R.id.action_settings) { return true; }
 
         return super.onOptionsItemSelected(item);
     }

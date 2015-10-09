@@ -5,34 +5,15 @@
     <string name="action_settings">Pour le moment y\'a rien</string>
     <string name="action_settings2">Mais ça va changer</string>
     <string name="action_settings3">Promis !</string>
-    <string name="EPARKING_PREFS">eParking_Prefs</string>
+
+    <string name="general_prefs">eParking_Prefs</string>
     <string name="username">Votre nom :</string>
     <string name="license">Votre immatriculation :</string>
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
 
-    <string name="noIdAuto">Veuillez entrer un numéro de plaque\nSans espaces ni traits d\'union.</string>
-    <string name="noIdZone">Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.</string>
-    <string name="noContact">Actuellement indisponible…</string>
-    <string name="noValues">Veuillez entrer des valeurs !</string>
-
-    <string name="contactNum1">4810</string>
-    <string name="contactLabel1">Verviers</string>
-
-    <string name="contactNum2">4411</string>
-    <string name="contactLabel2">Liège</string>
-
-    <string name="contactNum3">%1$s</string>
-    <string name="contactLabel3"><i>Entrée manuelle</i></string>
-
     <string name="idAuto1">Immatriculation</string>
-    <string name="idAuto2">1DLI125</string>
-
     <string name="idZone1">Identifiant de Zone</string>
-    <string name="idZone2">Ver2</string>
-
-    <string name="parkStart"><b>Start</b></string>
-    <string name="parkStop">Stop</string>
 
     <string name="infoLabel"><u><b>Informations :</b></u></string>
     <string name="infoShow"><i>En attente d\'une entrée utilisateur...</i></string>

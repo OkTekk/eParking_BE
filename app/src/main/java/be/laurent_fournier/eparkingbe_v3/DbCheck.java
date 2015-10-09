@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class DbCheck extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "eParking.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DbCheck(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,21 +33,20 @@ public class DbCheck extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE buffer (_id integer primary key autoincrement, iduser integer, idzone integer, idauto integer, buffer text);");
         db.execSQL("CREATE TABLE history (_id integer primary key autoincrement, history text);");
 
-        db.execSQL("INSERT INTO user (_id, name) VALUES (null, 'Lowlow')");
-        db.execSQL("INSERT INTO user (_id, name) VALUES (null, 'Lupi')");
+        db.execSQL("INSERT INTO user (_id, name) VALUES (1, 'Lowlow')");
+        db.execSQL("INSERT INTO user (_id, name) VALUES (2, 'Lupi')");
         db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER1', 1)");
         db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER2', 1)");
         db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Verviers', 'VER3', 1)");
         db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Liège', 'LIE1', 2)");
-        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Liège', 'LIE1', 2)");
+        db.execSQL("INSERT INTO zone (_id, name, zoneid, provider) VALUES (null, 'Liège', 'LIE2', 2)");
         db.execSQL("INSERT INTO auto (_id, autoid) VALUES (null, '1DLI125')");
         db.execSQL("INSERT INTO auto (_id, autoid) VALUES (null, '1AWR849')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(DbCheck.class.getName(),
-                "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.");
+        Log.w(DbCheck.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.");
 
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS zone");

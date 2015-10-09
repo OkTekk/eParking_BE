@@ -17,6 +17,13 @@ public class Zone {
         this.zoneGeoposition = zoneGeoposition;
     }
 
+    public Zone(String zoneName, String zoneCode, int zoneProvider, String zoneGeoposition) {
+        this.zoneName = zoneName;
+        this.zoneCode = zoneCode;
+        this.zoneProvider = zoneProvider;
+        this.zoneGeoposition = zoneGeoposition;
+    }
+
     public void setZoneId(int zoneId) {
         this.zoneId = zoneId;
     }
@@ -55,7 +62,6 @@ public class Zone {
 
     @Override
     public String toString() {
-        return "Zone ID = " + zoneId + ", Zone Name = " + zoneName + ", Zone Code='" + zoneCode
-                + ", Zone Provider = " + zoneProvider + ", Zone Geoposition='" + zoneGeoposition;
+        return zoneCode;
     }
 }

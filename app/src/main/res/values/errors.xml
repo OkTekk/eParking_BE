@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="badNum">0x0000</string>
+    <string name="noIdAuto">Veuillez entrer un numéro de plaque\nSans espaces ni traits d\'union.</string>
+    <string name="noIdZone">Veuillez entrer le numéro de zone se situant sur le coté de la borne de parking la plus proche.</string>
+    <string name="noContact">Actuellement indisponible…</string>
+    <string name="noValues">Veuillez entrer des valeurs !</string>
+    <string name="badNum"><i>Erreur SmsBuild.</i>\nVeuillez contacter <b><u>mail@laurent-fournier.be</u></b> pour le reporter.</string>
 
 </resources>

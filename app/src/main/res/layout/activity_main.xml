@@ -24,12 +24,10 @@
             android:textSize="18sp"
             android:textColor="@color/greenBlue"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/idAuto2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="@string/idAuto2" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -47,51 +45,17 @@
             android:textSize="18sp"
             android:textColor="@color/greenBlue"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/idZone2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="@string/idZone2"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
-
-    <RadioGroup
-        android:id="@+id/contactNums"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:checkedButton="@+id/contactLabel1" >
-
-        <RadioButton
-            android:id="@+id/contactLabel1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contactLabel1"
-            android:textSize="18sp"/>
-
-        <RadioButton
-            android:id="@+id/contactLabel2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contactLabel2"
-            android:textSize="18sp"/>
-
-        <RadioButton
-            android:id="@+id/contactLabel3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contactLabel3"
-            android:textSize="18sp"/>
-
-    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -102,7 +66,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text=""
-            android:textSize="30sp"
             android:background="@drawable/left" />
 
         <Button
@@ -111,7 +74,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text=""
             android:textSize="30sp"
             android:background="@drawable/right"/>
 
@@ -121,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="35dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -147,7 +110,7 @@
             android:id="@+id/infoEtat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="@string/infoEtat"
             android:textSize="18sp"
